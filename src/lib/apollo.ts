@@ -1,7 +1,11 @@
-import { ApolloClient } from "@apollo/client";
-import { InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 export const client = new ApolloClient({
-  uri: 'https://api-sa-east-1.graphcms.com/v2/cl4ok33z90a7v01xxfcrl0gwa/master',
-  cache: new InMemoryCache()
-});
+    // Environmental variables in JS = imported as "process.env"
+    uri: import.meta.env.VITE_API_URL,
+    // Send token request by sending a header
+    headers: {
+        'Authorization': `Bearer ${import.meta.env.VITE_API_ACCESS_TOKEN}`
+    },
+    cache: new InMemoryCache()
+})
